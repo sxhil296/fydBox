@@ -1,4 +1,5 @@
-import Navigation from "../../ui/navigation";
+"use client";
+// import Navigation from "../../ui/navigation";
 import { Button } from "../../ui/button";
 import {
   Navbar as NavbarComponent,
@@ -12,9 +13,12 @@ import {
   SignOutButton,
   SignedIn,
   SignedOut,
+  UserButton,
 } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
   return (
     <header className="sticky top-0 z-50 -mb-4 px-4 pb-4">
       <div className="fade-bottom absolute left-0 h-24 w-full bg-background/15 backdrop-blur-lg"></div>
@@ -35,14 +39,16 @@ export default function Navbar() {
               <SignInButton />
             </SignedOut>
             <SignedIn>
-              <SignOutButton />
+              <UserButton />
             </SignedIn>
+            {pathname === "/" && (
+              <SignedIn>
+                <Button variant="default" asChild>
+                  <a href="/dashboard">Dashboard</a>
+                </Button>
+              </SignedIn>
+            )}
 
-            <SignedIn>
-              <Button variant="default" asChild>
-                <a href="/dashboard">Dashboard</a>
-              </Button>
-            </SignedIn>
             <SignedOut>
               <Button variant="default" asChild>
                 <a href="/sign-in">Get Started</a>

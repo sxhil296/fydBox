@@ -6,9 +6,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="max-w-container mx-auto h-full mt-20 w-full">
-      <GenerateLinkForm />
-      {children}
-    </div>
+    <div className="max-w-container mx-auto h-full w-full">{children}</div>
   );
 }

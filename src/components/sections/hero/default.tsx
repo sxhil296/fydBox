@@ -48,7 +48,7 @@ export default function Hero() {
           <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
             <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
               <Button variant="default" size="lg" asChild>
-                <a href="/">Get Started</a>
+                <a href="/dashboard">Get Started</a>
               </Button>
               {/* <Button variant="glow" size="lg" asChild>
                 <a href="/">

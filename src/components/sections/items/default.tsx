@@ -1,12 +1,12 @@
 import {
-  BlocksIcon,
-  EclipseIcon,
-  FastForwardIcon,
-  LanguagesIcon,
-  MonitorSmartphoneIcon,
-  RocketIcon,
-  ScanFaceIcon,
-  SquarePenIcon,
+  LinkIcon,
+  QrCodeIcon,
+  ShieldCheckIcon,
+  MessageSquareIcon,
+  UserCheckIcon,
+  DatabaseIcon,
+  GlobeIcon,
+  EyeOffIcon,
 } from "lucide-react";
 import { Item, ItemIcon, ItemTitle, ItemDescription } from "../../ui/item";
 import { Section } from "../../ui/section";
@@ -15,96 +15,97 @@ export default function Items() {
   return (
     <Section>
       <div className="mx-auto flex max-w-container flex-col items-center gap-6 sm:gap-20">
-        <h2 className="max-w-[560px] text-center text-3xl font-semibold leading-tight sm:text-5xl sm:leading-tight">
-          Everything you need. Nothing you don&apos;t.
+        <h2 className="max-w-[760px] text-center text-3xl font-semibold leading-tight sm:text-5xl sm:leading-tight">
+          Collect Feedback Effortlessly & Anonymously
         </h2>
         <div className="grid auto-rows-fr grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <ScanFaceIcon className="h-5 w-5 stroke-1" />
+                <LinkIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              Accessibility first
+              Shareable Links
             </ItemTitle>
             <ItemDescription>
-              Fully WCAG 2.0 compliant, made with best a11y practices
+              Generate unique links for easy feedback collection.
             </ItemDescription>
           </Item>
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <MonitorSmartphoneIcon className="h-5 w-5 stroke-1" />
+                <QrCodeIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              Responsive design
+              QR Code Support
             </ItemTitle>
             <ItemDescription>
-              Looks and works great on any device and screen size
+              Instantly create QR codes for quick access to feedback forms.
             </ItemDescription>
           </Item>
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <EclipseIcon className="h-5 w-5 stroke-1" />
+                <ShieldCheckIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              Light and dark mode
+              Secure & Private
             </ItemTitle>
             <ItemDescription>
-              Seamless switching between color schemes, 6 themes included
+              All feedback is encrypted and stored securely.
             </ItemDescription>
           </Item>
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <BlocksIcon className="h-5 w-5 stroke-1" />
+                <MessageSquareIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              Easy to customize
+              Anonymous Feedback
             </ItemTitle>
             <ItemDescription>
-              Flexible options to match your product or brand
+              Users can submit responses without revealing their identity.
             </ItemDescription>
           </Item>
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <FastForwardIcon className="h-5 w-5 stroke-1" />
+                <UserCheckIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              Top-level performance
+              Admin Control
             </ItemTitle>
             <ItemDescription>
-              Made for lightning-fast load times and smooth interactions
+              Manage, review, and analyze responses in one place.
             </ItemDescription>
           </Item>
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <RocketIcon className="h-5 w-5 stroke-1" />
+                <DatabaseIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              Production ready
+              Data Insights
             </ItemTitle>
             <ItemDescription>
-              Thoroughly tested and launch-prepared
+              Visualize and export feedback for better decision-making.
             </ItemDescription>
           </Item>
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <LanguagesIcon className="h-5 w-5 stroke-1" />
+                <GlobeIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              Made for localisation
+              Multi-Language Support
             </ItemTitle>
             <ItemDescription>
-              Easy to implement support for multiple languages and regions
+              Customize feedback forms for different languages.
             </ItemDescription>
           </Item>
           <Item>
             <ItemTitle className="flex items-center gap-2">
               <ItemIcon>
-                <SquarePenIcon className="h-5 w-5 stroke-1" />
+                <EyeOffIcon className="h-5 w-5 stroke-1" />
               </ItemIcon>
-              CMS friendly
+              No Tracking
             </ItemTitle>
             <ItemDescription>
-              Built to work with your any headless content management system
+              Users can respond with confidence, knowing their data isn’t
+              tracked.
             </ItemDescription>
           </Item>
         </div>

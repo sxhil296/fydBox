@@ -4,9 +4,7 @@ import { redirect } from "next/navigation";
 
 export async function generateLinkAction(formData: FormData) {
   const name = formData.get("name") as string;
-  //   await new Promise((resolve) => {
-  //     setTimeout(resolve, 2000);
-  //   });
+  
   console.log(name);
 }
 

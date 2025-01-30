@@ -10,7 +10,7 @@ export default function CTA() {
           Start Getting Feedbacks
         </h2>
         <Button variant="default" size="lg" asChild>
-          <a href="/">Get Started</a>
+          <a href="/dashboard">Get Started</a>
         </Button>
       </div>
       <div className="absolute left-0 top-0 h-full w-full translate-y-[1rem] opacity-80 transition-all duration-500 ease-in-out group-hover:translate-y-[-2rem] group-hover:opacity-100">

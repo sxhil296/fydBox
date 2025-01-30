@@ -13,7 +13,7 @@ export default function FooterSection() {
     <footer className="w-full bg-background px-4">
       <div className="mx-auto max-w-container">
         <Footer>
-          <FooterContent>
+          {/* <FooterContent>
             <FooterColumn className="col-span-2 sm:col-span-3 md:col-span-1">
               <div className="flex items-center gap-2">
                 <MessageCircle />
@@ -23,10 +23,10 @@ export default function FooterSection() {
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold">Product</h3>
               <a href="/" className="text-sm text-muted-foreground">
-                Changelog
+                anonChat
               </a>
               <a href="/" className="text-sm text-muted-foreground">
-                Documentation
+                FydBox
               </a>
             </FooterColumn>
             <FooterColumn>
@@ -53,7 +53,7 @@ export default function FooterSection() {
                 Github
               </a>
             </FooterColumn>
-          </FooterContent>
+          </FooterContent> */}
           <FooterBottom>
             <div>© {new Date().getFullYear()} FydBox. All rights reserved</div>
             <div className="flex items-center gap-4">
