@@ -7,7 +7,12 @@ import {
 } from "../../ui/navbar";
 import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
 import { Menu, MessageCircle } from "lucide-react";
-import { SignInButton, SignedOut } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignOutButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
 
 export default function Navbar() {
   return (
@@ -29,9 +34,21 @@ export default function Navbar() {
             <SignedOut>
               <SignInButton />
             </SignedOut>
-            <Button variant="default" asChild>
-              <a href="/sign-in">Get Started</a>
-            </Button>
+            <SignedIn>
+              <SignOutButton />
+            </SignedIn>
+
+            <SignedIn>
+              <Button variant="default" asChild>
+                <a href="/dashboard">Dashboard</a>
+              </Button>
+            </SignedIn>
+            <SignedOut>
+              <Button variant="default" asChild>
+                <a href="/sign-in">Get Started</a>
+              </Button>
+            </SignedOut>
+
             <Sheet>
               <SheetTrigger asChild>
                 <Button
