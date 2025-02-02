@@ -15,7 +15,7 @@ export default async function Dashboard() {
   console.log("Dashbaord results>>>", feedbacks);
 
   return (
-    <div className="my-10 w-full flex flex-col items-center gap-10">
+    <div className="my-10 w-full flex flex-col items-center gap-4 md:gap-10">
       <GenerateLinkForm />
       <FeedbackTable  feedbacks={feedbacks}/>
     </div>
