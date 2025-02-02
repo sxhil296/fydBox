@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import * as Clerk from "@clerk/elements/common";
 import * as SignUp from "@clerk/elements/sign-up";
 import { MessageCircle } from "lucide-react";
@@ -10,51 +11,51 @@ export default function SignUpPage() {
       <SignUp.Root>
         <SignUp.Step
           name="start"
-          className="w-full space-y-6 bg-white px-4 py-10  ring-black/5 sm:w-96 sm:px-8"
+          className="w-full space-y-6  px-4 py-10  ring-black/5 sm:w-96 sm:px-8"
         >
           <header className="flex flex-col justify-center items-center">
             <MessageCircle className="w-9 h-9" />
-            <h1 className="mt-4 text-xl font-medium tracking-tight text-neutral-950">
+            <h1 className="mt-4 text-xl font-medium tracking-tight ">
               Sign Up to FydBox
             </h1>
           </header>
           <Clerk.GlobalError className="block text-sm text-red-400" />
           <div className="space-y-4">
             <Clerk.Field name="emailAddress" className="space-y-2">
-              <Clerk.Label className="text-sm font-medium text-zinc-950">
+              <Clerk.Label className="text-sm font-medium ">
                 Email
               </Clerk.Label>
               <Clerk.Input
                 type="email"
                 required
-                className="w-full rounded-md bg-white px-3.5 py-2 text-sm outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-zinc-950 data-[invalid]:ring-red-400"
+                className="w-full rounded-md  px-3.5 py-2 text-sm outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-zinc-950 data-[invalid]:ring-red-400"
               />
               <Clerk.FieldError className="block text-sm text-red-400" />
             </Clerk.Field>
             <Clerk.Field name="password" className="space-y-2">
-              <Clerk.Label className="text-sm font-medium text-zinc-950">
+              <Clerk.Label className="text-sm font-medium ">
                 Password
               </Clerk.Label>
               <Clerk.Input
                 type="password"
                 required
-                className="w-full rounded-md bg-white px-3.5 py-2 text-sm outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-zinc-950 data-[invalid]:ring-red-400"
+                className="w-full rounded-md  px-3.5 py-2 text-sm outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-zinc-950 data-[invalid]:ring-red-400"
               />
               <Clerk.FieldError className="block text-sm text-red-400" />
             </Clerk.Field>
           </div>
           <SignUp.Action
             submit
-            className="w-full rounded-md bg-zinc-950 px-3.5 py-1.5 text-center text-sm font-medium text-white shadow outline-none ring-1 ring-inset ring-zinc-950 hover:bg-zinc-800 focus-visible:outline-[1.5px] focus-visible:outline-offset-2 focus-visible:outline-zinc-950 active:text-white/70"
+            asChild
           >
-            Sign Up
+            <Button className="w-full">Sign Up</Button>
           </SignUp.Action>
 
           <p className="text-center text-sm text-zinc-500">
             Already have an account?{" "}
             <Clerk.Link
               navigate="sign-in"
-              className="font-medium text-zinc-950 decoration-zinc-950/20 underline-offset-4 outline-none hover:text-zinc-700 hover:underline focus-visible:underline"
+              className="font-medium   underline-offset-4 outline-none  hover:underline focus-visible:underline"
             >
               Sign in
             </Clerk.Link>
