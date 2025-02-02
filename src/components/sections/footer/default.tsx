@@ -6,14 +6,15 @@ import {
   // FooterContent,
 } from "../../ui/footer";
 import Link from "next/link";
+import Container from "@/components/general/container";
 // import LaunchUI from "../../logos/launch-ui";
 // import { MessageCircle } from "lucide-react";
 
 export default function FooterSection() {
   return (
-    <footer className="w-full bg-background px-4">
-      <div className="mx-auto max-w-container">
-        <Footer>
+    <footer className="w-full">
+      <Container>
+        <Footer className="pt-0">
           {/* <FooterContent>
             <FooterColumn className="col-span-2 sm:col-span-3 md:col-span-1">
               <div className="flex items-center gap-2">
@@ -64,7 +65,7 @@ export default function FooterSection() {
             </div>
           </FooterBottom>
         </Footer>
-      </div>
+      </Container>
     </footer>
   );
 }

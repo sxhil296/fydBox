@@ -11,6 +11,49 @@ import {
 import { Item, ItemIcon, ItemTitle, ItemDescription } from "../../ui/item";
 import { Section } from "../../ui/section";
 
+const mockData = [
+  {
+    icon: LinkIcon,
+    title: "Shareable Links",
+    description: "Generate unique links for easy feedback collection.",
+  },
+  {
+    icon: QrCodeIcon,
+    title: "QR Code Support",
+    description: "Instantly create QR codes for quick access to feedback forms.",
+  },
+  {
+    icon: ShieldCheckIcon,
+    title: "Secure & Private",
+    description: "All feedback is encrypted and stored securely.",
+  },
+  {
+    icon: MessageSquareIcon,
+    title: "Anonymous Feedback",
+    description: "Users can submit responses without revealing their identity.",
+  },
+  {
+    icon: UserCheckIcon,
+    title: "Admin Control",
+    description: "Manage, review, and analyze responses in one place.",
+  },
+  {
+    icon: DatabaseIcon,
+    title: "Data Insights",
+    description: "Visualize and export feedback for better decision-making.",
+  },
+  {
+    icon: GlobeIcon,
+    title: "Multi-Language Support",
+    description: "Customize feedback forms for different languages.",
+  },
+  {
+    icon: EyeOffIcon,
+    title: "No Tracking",
+    description: "Users can respond with confidence, knowing their data is not tracked."
+  },
+];
+
 export default function Items() {
   return (
     <Section>
@@ -18,96 +61,20 @@ export default function Items() {
         <h2 className="max-w-[760px] text-center text-3xl font-semibold leading-tight sm:text-5xl sm:leading-tight">
           Collect Feedback Effortlessly & Anonymously
         </h2>
-        <div className="grid auto-rows-fr grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <LinkIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              Shareable Links
-            </ItemTitle>
-            <ItemDescription>
-              Generate unique links for easy feedback collection.
-            </ItemDescription>
-          </Item>
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <QrCodeIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              QR Code Support
-            </ItemTitle>
-            <ItemDescription>
-              Instantly create QR codes for quick access to feedback forms.
-            </ItemDescription>
-          </Item>
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <ShieldCheckIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              Secure & Private
-            </ItemTitle>
-            <ItemDescription>
-              All feedback is encrypted and stored securely.
-            </ItemDescription>
-          </Item>
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <MessageSquareIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              Anonymous Feedback
-            </ItemTitle>
-            <ItemDescription>
-              Users can submit responses without revealing their identity.
-            </ItemDescription>
-          </Item>
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <UserCheckIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              Admin Control
-            </ItemTitle>
-            <ItemDescription>
-              Manage, review, and analyze responses in one place.
-            </ItemDescription>
-          </Item>
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <DatabaseIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              Data Insights
-            </ItemTitle>
-            <ItemDescription>
-              Visualize and export feedback for better decision-making.
-            </ItemDescription>
-          </Item>
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <GlobeIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              Multi-Language Support
-            </ItemTitle>
-            <ItemDescription>
-              Customize feedback forms for different languages.
-            </ItemDescription>
-          </Item>
-          <Item>
-            <ItemTitle className="flex items-center gap-2">
-              <ItemIcon>
-                <EyeOffIcon className="h-5 w-5 stroke-1" />
-              </ItemIcon>
-              No Tracking
-            </ItemTitle>
-            <ItemDescription>
-              Users can respond with confidence, knowing their data isn’t
-              tracked.
-            </ItemDescription>
-          </Item>
+        <div className="grid auto-rows-fr grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {mockData.map((item, index) => (
+            <Item key={index} className="custom-shadow rounded-md">
+              <ItemTitle className="flex items-center gap-2">
+                <ItemIcon>
+                  <item.icon className="h-5 w-5 stroke-1" />
+                </ItemIcon>
+                {item.title}
+              </ItemTitle>
+              <ItemDescription>
+                {item.description}
+              </ItemDescription>
+            </Item>
+          ))}
         </div>
       </div>
     </Section>

@@ -13,7 +13,6 @@ import {
 } from "react-share";
 import { Button } from "../ui/button";
 import * as htmlToImage from "html-to-image";
-import { Separator } from "../ui/separator";
 
 interface ShareLinkProps {
   link: string;
@@ -48,7 +47,7 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
   };
 
   return (
-    <div className="relative border border-brand rounded-md p-4 w-full md:max-w-[760px] mx-auto flex flex-col gap-2 md:gap-4">
+    <div className="relative border border-brand rounded-md p-4 w-full sm:max-w-3xl mx-auto flex flex-col gap-2 md:gap-4">
       <div className="text-lg font-medium text-center">
         Below is the link and QR for your{" "}
         <span className="font-bold text-blue-500">{feedbackName}</span> feedback
@@ -68,7 +67,7 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
         </button>
       </div>
 
-      <Separator />
+
 
       <div className="flex flex-col gap-2 items-center mb-2">
         <p className="text-sm">Share the link directly on : </p>
@@ -87,11 +86,11 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
           </LinkedinShareButton>
         </div>
       </div>
-      <Separator />
+
       <div className="flex flex-col items-center gap-2">
         <div
           ref={qrCodeRef}
-          className="qr-code bg-white p-4 rounded-md w-56 flex justify-center items-center flex-col gap-4"
+          className="qr-code bg-white p-4 rounded-md w-56 h-auto flex justify-center items-center flex-col gap-4"
         >
           <h3 className="text-lg  mb-2 text-black text-center">
             Scan the QR Code below to give your anonymous feedback on &nbsp;
