@@ -8,7 +8,8 @@ import { Mockup, MockupFrame } from "../../ui/mockup";
 import Glow from "../../ui/glow";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import Github from "../../logos/github";
+import Link from "next/link";
+// import Github from "../../logos/github";
 
 export default function Hero() {
   const { resolvedTheme } = useTheme();
@@ -34,10 +35,10 @@ export default function Hero() {
             <span className="text-muted-foreground">
               New version of <strong>anonchat</strong> is out!
             </span>
-            <a href="/" className="flex items-center gap-1">
+            <Link href="/" className="flex items-center gap-1">
               Get started
               <ArrowRightIcon className="h-3 w-3" />
-            </a>
+            </Link>
           </Badge>
           <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight">
           Honest Feedback, No Names Attached

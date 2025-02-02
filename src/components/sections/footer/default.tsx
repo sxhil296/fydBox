@@ -1,12 +1,13 @@
 import { ModeToggle } from "../../ui/mode-toggle";
 import {
   Footer,
-  FooterColumn,
+  // FooterColumn,
   FooterBottom,
-  FooterContent,
+  // FooterContent,
 } from "../../ui/footer";
-import LaunchUI from "../../logos/launch-ui";
-import { MessageCircle } from "lucide-react";
+import Link from "next/link";
+// import LaunchUI from "../../logos/launch-ui";
+// import { MessageCircle } from "lucide-react";
 
 export default function FooterSection() {
   return (
@@ -57,8 +58,8 @@ export default function FooterSection() {
           <FooterBottom>
             <div>© {new Date().getFullYear()} FydBox. All rights reserved</div>
             <div className="flex items-center gap-4">
-              <a href="/">Privacy Policy</a>
-              <a href="/">Terms of Service</a>
+              <Link href="/">Privacy Policy</Link>
+              <Link href="/">Terms of Service</Link>
               <ModeToggle />
             </div>
           </FooterBottom>

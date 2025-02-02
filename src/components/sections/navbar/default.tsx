@@ -10,12 +10,12 @@ import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
 import { Menu, MessageCircle } from "lucide-react";
 import {
   SignInButton,
-  SignOutButton,
   SignedIn,
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -25,10 +25,10 @@ export default function Navbar() {
       <div className="relative mx-auto max-w-container">
         <NavbarComponent>
           <NavbarLeft>
-            <a href="/" className="flex items-center gap-2 text-xl font-bold">
+            <Link href="/" className="flex items-center gap-2 text-xl font-bold">
               <MessageCircle />
               FydBox
-            </a>
+            </Link>
             {/* <Navigation /> */}
           </NavbarLeft>
           <NavbarRight>
@@ -44,14 +44,14 @@ export default function Navbar() {
             {pathname === "/" && (
               <SignedIn>
                 <Button variant="default" asChild>
-                  <a href="/dashboard">Dashboard</a>
+                  <Link href="/dashboard">Dashboard</Link>
                 </Button>
               </SignedIn>
             )}
 
             <SignedOut>
               <Button variant="default" asChild>
-                <a href="/sign-in">Get Started</a>
+                <Link href="/sign-in">Get Started</Link>
               </Button>
             </SignedOut>
 
@@ -68,30 +68,30 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent side="right">
                 <nav className="grid gap-6 text-lg font-medium">
-                  <a
+                  <Link
                     href="/"
                     className="flex items-center gap-2 text-xl font-bold"
                   >
                     <span>FydBox</span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/sign-in"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Getting Started
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     FAQs
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Documentation
-                  </a>
+                  </Link>
                 </nav>
               </SheetContent>
             </Sheet>

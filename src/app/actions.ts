@@ -59,6 +59,6 @@ export async function submitFeedbackAction(formData: FormData) {
   //   await new Promise((resolve) => {
   //     setTimeout(resolve, 2000);
   //   });
-  console.log(formData);
+  console.log(subject, feedback);
   redirect("/");
 }
