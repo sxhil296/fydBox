@@ -17,10 +17,10 @@ export default function Hero() {
 
   switch (resolvedTheme) {
     case "light":
-      src = "/random.png";
+      src = "/fydboxdark.png";
       break;
     case "dark":
-      src = "/random.png";
+      src = "/fydboxlight.png";
       break;
     default:
       src = "/random.png";

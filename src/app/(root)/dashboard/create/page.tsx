@@ -1,3 +1,4 @@
+import GenerateLinkForm from "@/components/dashboard/generateLinkForm";
 import Container from "@/components/general/container";
 import {
   Breadcrumb,
@@ -8,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export default function FeedbackDetails() {
+export default function CreateFeedback() {
   return (
     <div className="w-full my-10">
       <Container>
@@ -23,10 +24,11 @@ export default function FeedbackDetails() {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage> Name Feedback</BreadcrumbPage>
+              <BreadcrumbPage>Create New Feedback</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+        <GenerateLinkForm />
       </Container>
     </div>
   );

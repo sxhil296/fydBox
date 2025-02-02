@@ -31,11 +31,11 @@ export async function generateLinkAction(formData: FormData) {
     .returning({
       name: Feedbacks.name,
       id: Feedbacks.id,
-      link:Feedbacks.feedbackLink
+      link: Feedbacks.feedbackLink,
     });
   // console.log(feedbackLink);
   console.log("FEEDBACK RESULTS", results);
-  revalidatePath("/dashboard", "page");
+  revalidatePath("/dashboard/create", "page");
   return results[0];
 }
 

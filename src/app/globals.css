@@ -144,3 +144,13 @@
     mask-image: linear-gradient(to left, transparent 15%, black 100%);
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+html {
+  scrollbar-width: none;
+}
+body {
+  -ms-overflow-style: none;
+}

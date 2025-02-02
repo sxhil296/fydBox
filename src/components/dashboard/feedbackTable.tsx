@@ -8,10 +8,12 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { Copy } from "lucide-react";
+import { Copy, PlusCircle } from "lucide-react";
 import type { Feedbacks } from "@/db/schema";
 import { cn } from "@/lib/utils";
 import Container from "@/components/general/container";
+import { Button } from "../ui/button";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface FeedbackTableProps {
   feedbacks: (typeof Feedbacks.$inferSelect)[];
@@ -20,17 +22,27 @@ interface FeedbackTableProps {
 export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
   return (
     <div className="w-full">
-      <Container className="flex-grow flex flex-col">
-        <h2 className="text-lg font-medium mb-4">Your feedbacks</h2>
+      <Container className="flex-grow flex flex-col gap-6 md:gap-10">
+        <div className="w-full justify-between flex items-baseline">
+          <h2 className="text-2xl font-medium mb-4">Your feedbacks</h2>
+          <Button variant={"ghost"}>
+            <Link href={"/dashboard/create"} className="flex items-center gap-2">
+              <PlusCircle className="w-4 h-auto" />
+              Create
+            </Link>
+          </Button>
+        </div>
         {feedbacks.length > 0 ? (
-          <div className="md:max-h-[500px] overflow-y-auto relative">
-            <Table >
+          <ScrollArea className="h-[500px] w-full">
+            <Table>
               <TableHeader className="sticky top-0 bg-background z-10">
                 <TableRow>
                   <TableHead className="p-2 md:p-4">Date</TableHead>
                   <TableHead className="p-2 md:p-4">Name</TableHead>
-                  <TableHead className="p-2 md:p-4">Received</TableHead>
-                  <TableHead className="p-2 md:p-4 hidden md:table-cell">
+                  <TableHead className="p-2 md:p-4 text-center">
+                    Received
+                  </TableHead>
+                  <TableHead className="p-2 md:p-4 hidden md:table-cell text-center">
                     Link
                   </TableHead>
                   <TableHead className="p-2 md:p-4 text-center">
@@ -77,11 +89,11 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                         124
                       </Link>
                     </TableCell>
-                    <TableCell className="p-2 md:p-4 hidden md:table-cell">
-                      <div className="flex items-center gap-1 overflow-hidden">
+                    <TableCell className="p-2 md:p-4 hidden md:table-cell text-center">
+                      <div className="flex items-center justify-center gap-2 overflow-hidden ">
                         <Link
                           href={feedback?.feedbackLink}
-                          className="block text-blue-500 max-w-[20ch] lg:max-w-[30ch] truncate"
+                          className="block text-blue-500 max-w-[50ch] lg:max-w-full truncate"
                         >
                           {feedback?.feedbackLink}
                         </Link>
@@ -109,7 +121,7 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                 ))}
               </TableBody>
             </Table>
-          </div>
+          </ScrollArea>
         ) : (
           <div className="text-center p-6 text-gray-500">No feedbacks yet.</div>
         )}

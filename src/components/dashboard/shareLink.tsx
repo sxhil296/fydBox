@@ -1,32 +1,5 @@
-// import { Copy } from "lucide-react";
-// import Link from "next/link";
-
-// interface ShareLinkProps {
-//   link: string;
-//   feedbackName: string;
-// }
-
-// export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
-//   return (
-//     <div className="border rounded-md p-4 shadow-md w-full max-w-[760px] h-auto flex flex-col gap-2">
-//       <p className="text-lg font-medium">
-//         Below is the link for your{" "}
-//         <span className="font-bold text-blue-500">{feedbackName}</span> feedback
-//       </p>
-
-//       <div className="flex justify-center items-center gap-2 p-2">
-//         <Link
-//           href={link}
-//         >
-//           {link}
-//         </Link>
-//         <Copy className="w-4 h-auto" />
-//       </div>
-//     </div>
-//   );
-// }
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
   FacebookShareButton,
@@ -39,7 +12,8 @@ import {
   WhatsappIcon,
 } from "react-share";
 import { Button } from "../ui/button";
-
+import * as htmlToImage from "html-to-image";
+import { Separator } from "../ui/separator";
 
 interface ShareLinkProps {
   link: string;
@@ -48,6 +22,7 @@ interface ShareLinkProps {
 
 export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
   const [copied, setCopied] = useState(false);
+  const qrCodeRef = useRef<HTMLDivElement>(null);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link).then(() => {
@@ -56,15 +31,31 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
     });
   };
 
-  return (
-    <div className="border rounded-md p-4 shadow-md w-full max-w-[760px] mx-auto">
-      <p className="text-lg font-medium mb-4">
-        Below is the link and QR for your &nbsp;
-        <span className="font-bold text-blue-500">{feedbackName}</span> feedback
-      </p>
+  const downloadQRCode = () => {
+    if (qrCodeRef.current) {
+      htmlToImage
+        .toPng(qrCodeRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.download = `${feedbackName}FeedbackQR.png`;
+          link.href = dataUrl;
+          link.click();
+        })
+        .catch((error) => {
+          console.error("Error generating QR code image:", error);
+        });
+    }
+  };
 
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
-        <div className="flex items-center justify-between gap-2 w-full sm:w-auto overflow-hidden">
+  return (
+    <div className="relative border border-brand rounded-md p-4 w-full max-w-[760px] mx-auto flex flex-col gap-2 md:gap-4">
+      <div className="text-lg font-medium text-center">
+        Below is the link and QR for your{" "}
+        <span className="font-bold text-blue-500">{feedbackName}</span> feedback
+      </div>
+
+     
+        <div className="flex items-center justify-center gap-2 w-full sm:w-auto overflow-hidden">
           <Link
             href={link}
             target="_blank"
@@ -73,33 +64,49 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
             {link}
           </Link>
 
-          <Button className="w-4 h-4" onClick={copyToClipboard} type="button">{copied? "Copied": "Copy"}</Button>
-      
+          <button  onClick={copyToClipboard} type="button" className="text-sm">
+            {copied ? "Copied" : "Copy"}
+          </button>
         </div>
-      </div>
-
-      <div className="flex flex-col sm:flex-row items-center gap-4">
-        <div className="qr-code">
-          <QRCodeSVG value={link} size={128} />
-        </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-lg">Share the link directly on : </p>
+   
+<Separator/>
+   
+        <div className="flex flex-col gap-2 items-center mb-2">
+          <p className="text-sm">Share the link directly on : </p>
           <div className="flex justify-center items-center gap-2">
             <WhatsappShareButton url={link}>
-              <WhatsappIcon size={40} />
+              <WhatsappIcon size={24} className="rounded-sm" />
             </WhatsappShareButton>
             <FacebookShareButton url={link}>
-              <FacebookIcon size={40} />
+              <FacebookIcon size={24} className="rounded-sm" />
             </FacebookShareButton>
             <TwitterShareButton url={link}>
-              <XIcon size={40} />
+              <XIcon size={24} className="rounded-sm" />
             </TwitterShareButton>
             <LinkedinShareButton url={link}>
-              <LinkedinIcon size={40} />
+              <LinkedinIcon size={24} className="rounded-sm" />
             </LinkedinShareButton>
           </div>
         </div>
-      </div>
+        <Separator />
+        <div className="flex flex-col items-center gap-2">
+          <div
+            ref={qrCodeRef}
+            className="qr-code bg-white p-4 rounded-md w-56 flex justify-center items-center flex-col gap-4"
+          >
+            <h3 className="text-lg  mb-2 text-black text-center">
+              Scan the QR Code below to give your anonymous feedback on &nbsp;
+              <span className="text-blue-500 text-xl font-semibold">
+                {feedbackName}
+              </span>
+            </h3>
+            <QRCodeSVG value={link} size={128} />
+          </div>
+          <Button onClick={downloadQRCode} variant="outline">
+            Download QR Code
+          </Button>
+        </div>
+  
     </div>
   );
 }

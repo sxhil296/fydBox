@@ -6,8 +6,8 @@ import {
   NavbarLeft,
   NavbarRight,
 } from "../../ui/navbar";
-import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
-import { Menu, MessageCircle } from "lucide-react";
+// import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
+import {  MessageCircle } from "lucide-react";
 import {
   SignInButton,
   SignedIn,
@@ -55,7 +55,7 @@ export default function Navbar() {
               </Button>
             </SignedOut>
 
-            <Sheet>
+            {/* <Sheet>
               <SheetTrigger asChild>
                 <Button
                   variant="ghost"
@@ -94,7 +94,7 @@ export default function Navbar() {
                   </Link>
                 </nav>
               </SheetContent>
-            </Sheet>
+            </Sheet> */}
           </NavbarRight>
         </NavbarComponent>
       </div>
