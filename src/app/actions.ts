@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { Feedbacks } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { randomUUID } from "crypto";
+import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -27,10 +28,29 @@ export async function generateLinkAction(formData: FormData) {
       status: "active",
       userId: userId,
     })
-    .returning();
+    .returning({
+      name: Feedbacks.name,
+      id: Feedbacks.id,
+      link:Feedbacks.feedbackLink
+    });
   // console.log(feedbackLink);
   console.log("FEEDBACK RESULTS", results);
-  revalidatePath("/dashboard", 'page')
+  revalidatePath("/dashboard", "page");
+  return results[0];
+}
+
+// delete feedback
+export async function deleteFeedbackAction(formData: FormData) {
+  const { userId, redirectToSignIn } = await auth();
+  if (!userId) return redirectToSignIn();
+  const feedbackId = formData.get("id") as string;
+
+  const results = await db
+    .delete(Feedbacks)
+    .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
+
+  console.log("DELETE RESULTS", results);
+  revalidatePath("/dashboard", "page");
 }
 
 export async function submitFeedbackAction(formData: FormData) {
