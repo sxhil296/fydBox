@@ -16,6 +16,7 @@ export default function GenerateLinkForm() {
   const formAction = async (formData: FormData) => {
     const result = await generateLinkAction(formData);
     setFeedback(result);
+    localStorage.setItem("result", JSON.stringify(result))
     console.log("Generated Link Result:", result);
   };
 
