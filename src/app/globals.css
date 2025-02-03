@@ -158,5 +158,5 @@ body {
 
 .custom-shadow {
   /* background: hsl(31, 97%, 72%); */
-  box-shadow: 0 8px 15px hsla(27, 96%, 40%, 0.3);
+  box-shadow: 0 5px 9px hsla(27, 96%, 40%, 0.3);
 }

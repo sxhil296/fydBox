@@ -61,7 +61,7 @@ export default async function FeedbackDetails({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="w-full flex justify-between items-center my-4">
+        <div className="w-full flex flex-col md:flex-row  justify-between items-start md:items-center gap-2 md:gap-0 my-4">
           <div className="flex items-center gap-4">
             <p className="text-2xl font-bold">{feedbacks[0]?.name}</p>
             <Badge
@@ -86,7 +86,7 @@ export default async function FeedbackDetails({
           <Link
             href={feedbacks[0]?.feedbackLink || "#"}
             target="_blank"
-            className="text-blue-500 text-sm"
+            className="text-blue-500 text-sm truncate max-w-[30ch] md:max-w-[120ch]"
           >
             {feedbacks[0]?.feedbackLink || "The link has been deactivated!"}
           </Link>
@@ -101,7 +101,7 @@ export default async function FeedbackDetails({
               .map((msg, index) => (
                 <div
                   key={index}
-                  className="p-4 rounded-tl-none rounded-tr-lg rounded-br-lg rounded-bl-lg w-fit max-w-xl"
+                  className="p-2 md:p-4 rounded-tl-none rounded-tr-lg rounded-br-lg rounded-bl-lg w-fit max-w-xl"
                   style={{
                     backgroundColor: "hsl(31, 97%, 72%)",
                     color: "#fff",
