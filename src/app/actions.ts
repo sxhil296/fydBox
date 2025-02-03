@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 // const BASE_URL = "http://localhost:3000/feedback";
-const BASE_URL = "https://fydbox.vercel.app";
+const BASE_URL = "https://fydbox.vercel.app/feedback";
 
 export async function generateLinkAction(formData: FormData) {
   const { userId, redirectToSignIn } = await auth();
