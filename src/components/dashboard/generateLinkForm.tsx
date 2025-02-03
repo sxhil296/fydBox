@@ -10,7 +10,7 @@ import Container from "../general/container";
 
 export default function GenerateLinkForm() {
   const [feedBack, setFeedback] = useState<
-    { name: string; id: string; link: string } | undefined
+    { name: string; id: string; link: string | null } | undefined
   >(undefined);
 
   const formAction = async (formData: FormData) => {
@@ -40,7 +40,7 @@ export default function GenerateLinkForm() {
         </Form>
         {feedBack && (
           <div className="mt-8">
-            <ShareLink feedbackName={feedBack.name} link={feedBack.link} />
+            <ShareLink feedbackName={feedBack.name} link={feedBack.link || ""} />
           </div>
         )}
       </Container>
