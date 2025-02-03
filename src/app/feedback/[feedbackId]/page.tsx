@@ -2,7 +2,6 @@ import { submitFeedbackAction } from "@/app/actions";
 import FeedbackNotFound from "@/components/feedback/feedbackNotFound";
 import Container from "@/components/general/container";
 import SubmitButton from "@/components/general/submitButton";
-
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { db } from "@/db";
@@ -38,9 +37,11 @@ export default async function Feedback({
           </div>
           <Input
             placeholder="Enter subject..."
-            name="subject"
-            id="subject"
+            name="feedbackId"
+            id="feedbackId"
             required
+            type="hidden"
+            value={feedbackId}
           />
           <Textarea
             placeholder="Enter feedback..."

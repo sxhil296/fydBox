@@ -1,14 +1,15 @@
 "use server";
 
 import { db } from "@/db";
-import { Feedbacks } from "@/db/schema";
+import { Feedbacks, Messages } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { randomUUID } from "crypto";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-const BASE_URL = "http://localhost:3000/feedback";
+// const BASE_URL = "http://localhost:3000/feedback";
+const BASE_URL = "https://fydbox.vercel.app";
 
 export async function generateLinkAction(formData: FormData) {
   const { userId, redirectToSignIn } = await auth();
@@ -45,16 +46,18 @@ export async function deleteFeedbackAction(formData: FormData) {
   if (!userId) return redirectToSignIn();
   const feedbackId = formData.get("id") as string;
 
+  await db.delete(Messages).where(eq(Messages.feedbackId, feedbackId));
+
   const results = await db
     .delete(Feedbacks)
     .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
 
   console.log("DELETE RESULTS", results);
-  revalidatePath("/dashboard", "page");
+  redirect("/dashboard");
 }
 
 // change status (expire the link if status is inactive)
-export async function changeStatusAction(formData: FormData): Promise<void>  {
+export async function changeStatusAction(formData: FormData): Promise<void> {
   const { userId, redirectToSignIn } = await auth();
   if (!userId) return redirectToSignIn();
   const feedbackId = formData.get("id") as string;
@@ -76,12 +79,16 @@ export async function changeStatusAction(formData: FormData): Promise<void>  {
   revalidatePath(`/dashboard/chats/${feedbackId}`, "page");
 }
 
-export async function submitFeedbackAction(formData: FormData) {
-  const subject = formData.get("subject") as string;
+export async function submitFeedbackAction(formData: FormData): Promise<void> {
   const feedback = formData.get("feedback") as string;
-  //   await new Promise((resolve) => {
-  //     setTimeout(resolve, 2000);
-  //   });
-  console.log(subject, feedback);
+  const feedbackId = formData.get("feedbackId") as string;
+  const msgId = randomUUID();
+
+  const results = await db.insert(Messages).values({
+    id: msgId,
+    feedbackId: feedbackId,
+    message: feedback,
+  });
+  console.log(results);
   redirect("/");
 }

@@ -33,7 +33,7 @@ export default function Hero() {
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           <Badge variant="outline" className="animate-appear">
             <span className="text-muted-foreground">
-              New version of <strong>anonchat</strong> is out!
+              New version of <Link href={'https://anon-chat-five.vercel.app/'} target="_black" className="font-bold">anonchat</Link> is out!
             </span>
             <Link href="/" className="flex items-center gap-1">
               Get started
