@@ -9,7 +9,7 @@ const NotFoundPage: React.FC = () => {
       <Container className="flex justify-center items-center min-h-[80dvh]">
         <h1 className="text-6xl font-bold ">404</h1>
         <p className="mt-4 text-xl">
-          Oops! The page you're looking for doesn't exist.
+          Oops! The page you&apos;re looking for doesn&apos;t exist.
         </p>
         <Button asChild>
           <Link href="/">Go back to Home</Link>
