@@ -22,7 +22,7 @@ export default async function Feedback({
     .where(eq(Feedbacks.id, feedbackId))
     .limit(1);
 
-  if (feedbackId !== result[0]?.id) {
+  if (feedbackId !== result[0]?.id || result[0].feedbackLink === null) {
     return <FeedbackNotFound />;
   }
 

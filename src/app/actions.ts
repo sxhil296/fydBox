@@ -53,6 +53,29 @@ export async function deleteFeedbackAction(formData: FormData) {
   revalidatePath("/dashboard", "page");
 }
 
+// change status (expire the link if status is inactive)
+export async function changeStatusAction(formData: FormData): Promise<void>  {
+  const { userId, redirectToSignIn } = await auth();
+  if (!userId) return redirectToSignIn();
+  const feedbackId = formData.get("id") as string;
+  const status = formData.get("status") as "active" | "inactive";
+
+  const feedbackLink = status === "active" ? `${BASE_URL}/${feedbackId}` : null;
+
+  const results = await db
+    .update(Feedbacks)
+    .set({ status, feedbackLink })
+    .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)))
+    .returning({
+      id: Feedbacks.id,
+      status: Feedbacks.status,
+      feedbackLink: Feedbacks.feedbackLink,
+    });
+
+  console.log("STATUS CHANGE RESULTS", results);
+  revalidatePath(`/dashboard/chats/${feedbackId}`, "page");
+}
+
 export async function submitFeedbackAction(formData: FormData) {
   const subject = formData.get("subject") as string;
   const feedback = formData.get("feedback") as string;

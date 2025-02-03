@@ -26,7 +26,10 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
         <div className="w-full justify-between flex items-baseline">
           <h2 className="text-2xl font-medium mb-4">Your feedbacks</h2>
           <Button variant={"ghost"}>
-            <Link href={"/dashboard/create"} className="flex items-center gap-2">
+            <Link
+              href={"/dashboard/create"}
+              className="flex items-center gap-2"
+            >
               <PlusCircle className="w-4 h-auto" />
               Create
             </Link>
@@ -73,37 +76,37 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                         </span>
                       </Link>
                     </TableCell>
-                    <TableCell className="font-medium p-2 md:p-4">
+                    <TableCell className="font-medium p-0">
                       <Link
                         href={`/dashboard/chats/${feedback?.id}`}
-                        className="block"
+                        className="block p-2 md:p-4"
                       >
                         {feedback?.name}
                       </Link>
                     </TableCell>
-                    <TableCell className="p-2 md:p-4 text-center">
+                    <TableCell className="p-0 text-center">
                       <Link
                         href={`/dashboard/chats/${feedback?.id}`}
-                        className="block"
+                        className="block p-2 md:p-4"
                       >
                         124
                       </Link>
                     </TableCell>
-                    <TableCell className="p-2 md:p-4 hidden md:table-cell text-center">
+                    <TableCell className="p-0 hidden md:table-cell text-center">
                       <div className="flex items-center justify-center gap-2 overflow-hidden ">
                         <Link
-                          href={feedback?.feedbackLink}
-                          className="block text-blue-500 max-w-[50ch] lg:max-w-full truncate"
+                          href={feedback?.feedbackLink || "#"}
+                          className="block p-2 md:p-4 text-blue-500 max-w-[50ch] lg:max-w-full truncate"
                         >
                           {feedback?.feedbackLink}
                         </Link>
                         <Copy className="w-4 h-auto cursor-pointer flex-shrink-0" />
                       </div>
                     </TableCell>
-                    <TableCell className="text-center p-2 md:p-4">
+                    <TableCell className="text-center p-0">
                       <Link
                         href={`/dashboard/chats/${feedback?.id}`}
-                        className="block"
+                        className="block p-2 md:p-4"
                       >
                         <Badge
                           className={cn(

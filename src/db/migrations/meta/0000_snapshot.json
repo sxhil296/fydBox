@@ -1,5 +1,5 @@
 {
-  "id": "20fede6f-cb45-42c7-a21c-ecb91dcea307",
+  "id": "a65067e5-31bb-4740-8b72-b2c1ef834f74",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -31,11 +31,11 @@
           "name": "feedbackLink",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "status": {
           "name": "status",
-          "type": "feed_status",
+          "type": "linkfeed_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -57,8 +57,8 @@
     }
   },
   "enums": {
-    "public.feed_status": {
-      "name": "feed_status",
+    "public.linkfeed_status": {
+      "name": "linkfeed_status",
       "schema": "public",
       "values": [
         "active",
