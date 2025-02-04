@@ -90,5 +90,5 @@ export async function submitFeedbackAction(formData: FormData): Promise<void> {
     message: feedback,
   });
   console.log(results);
-  redirect("/");
+  redirect(`/feedback/${feedbackId}/sent`);
 }

@@ -23,7 +23,7 @@ export default function Hero() {
       src = "/fydboxlight.png";
       break;
     default:
-      src = "/random.png";
+      src = "/fydboxdark.png";
       break;
   }
 
@@ -33,18 +33,28 @@ export default function Hero() {
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           <Badge variant="outline" className="animate-appear">
             <span className="text-muted-foreground">
-              New version of <Link href={'https://anon-chat-five.vercel.app/'} target="_black" className="font-bold">anonchat</Link> is out!
+              New version of{" "}
+              <Link
+                href={"https://anon-chat-five.vercel.app/"}
+                target="_black"
+                className="font-bold text-brand"
+              >
+                anonChat
+              </Link>{" "}
+              is out!
             </span>
-            <Link href="/" className="flex items-center gap-1">
+            <Link href="/dashboard" className="flex items-center gap-1">
               Get started
               <ArrowRightIcon className="h-3 w-3" />
             </Link>
           </Badge>
           <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight">
-          Honest Feedback, No Names Attached
+            Honest Feedback, No Names Attached
           </h1>
           <p className="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground opacity-0 delay-100 sm:text-xl">
-          Fydbox lets you collect genuine, anonymous feedback with ease. Share a link, gather insights, and improve—without the barriers of identity. Because real opinions matter
+            Fydbox lets you collect genuine, anonymous feedback with ease. Share
+            a link, gather insights, and improve—without the barriers of
+            identity. Because real opinions matter.
           </p>
           <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
             <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">

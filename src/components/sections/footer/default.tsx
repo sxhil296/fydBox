@@ -58,10 +58,17 @@ export default function FooterSection() {
           </FooterContent> */}
           <FooterBottom>
             <div>© {new Date().getFullYear()} FydBox. All rights reserved</div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 justify-center">
+              <Link href={"https://anon-chat-five.vercel.app/"} target="_black">
+                anonChat
+              </Link>
               <Link href="/">Privacy Policy</Link>
-              <Link href="/">Terms of Service</Link>
+              {/* <Link href="/">Terms of Service</Link> */}
+
               <ModeToggle />
+            </div>
+            <div>
+              Made with &hearts; by <Link href="/">Sahil</Link>{" "}
             </div>
           </FooterBottom>
         </Footer>

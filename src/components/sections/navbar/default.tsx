@@ -51,7 +51,7 @@ export default function Navbar() {
 
             <SignedOut>
               <Button variant="default" asChild>
-                <Link href="/sign-in">Get Started</Link>
+                <Link href="/sign-up">Get Started</Link>
               </Button>
             </SignedOut>
 
