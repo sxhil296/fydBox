@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Container from "@/components/general/container";
 import { Button } from "@/components/ui/button";
 import { CheckCheckIcon } from "lucide-react";
@@ -12,9 +12,9 @@ export default function SendPage() {
   };
   return (
     <div className="w-full">
-      <Container className="flex justify-center items-center min-h-[80dvh]">
+      <Container className="flex justify-center items-center my-20">
         <div className="flex flex-col gap-4 items-center justify-center">
-            <CheckCheckIcon className="w-8 h-auto"/>
+          <CheckCheckIcon className="w-8 h-auto" />
           <p className="text-xl font-medium text-center">
             Your feedback has been sent successfully and{" "}
             <strong>anonmously</strong>!

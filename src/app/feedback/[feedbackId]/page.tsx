@@ -32,7 +32,7 @@ export default async function Feedback({
           action={submitFeedbackAction}
           className="max-w-2xl mx-auto flex w-full flex-col gap-4"
         >
-          <div className="text-xl font-semibold mt-10">
+          <div className="text-xl font-semibold mt-8">
             Send your feedback for : {result[0]?.name}
           </div>
           <Input
@@ -53,7 +53,7 @@ export default async function Feedback({
           <SubmitButton title="Send Feedback" />
         </form>
 
-        <div className="max-w-2xl mx-auto  text-xl font-semibold mt-10">
+        <div className="max-w-2xl mx-auto  text-lg md:text-xl font-semibold mt-8">
           NOTE : Your feedback is completely anonymous and helps make things
           better. Be honest, be constructive, and share your thoughts freely.
         </div>
