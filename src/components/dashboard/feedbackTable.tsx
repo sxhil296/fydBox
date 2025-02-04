@@ -20,11 +20,11 @@ import { useState } from "react";
 
 interface FeedbackTableProps {
   feedbacks: (typeof Feedbacks.$inferSelect)[];
-  messages: number
+
 }
 
 
-export default function FeedbackTable({ feedbacks, messages }: FeedbackTableProps) {
+export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
   const [copied, setCopied] = useState(false);
 
   return (
@@ -96,7 +96,7 @@ export default function FeedbackTable({ feedbacks, messages }: FeedbackTableProp
                         href={`/dashboard/chats/${feedback?.id}`}
                         className="block p-2 md:p-4"
                       >
-                        {messages}
+                        {feedback?.messages?.length}
                       </Link>
                     </TableCell>
                     <TableCell className="p-0 hidden md:table-cell text-center">

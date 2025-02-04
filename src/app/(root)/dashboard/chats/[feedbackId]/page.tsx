@@ -13,11 +13,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { db } from "@/db";
-import { Feedbacks, Messages } from "@/db/schema";
+import { Feedbacks } from "@/db/schema";
 import { cn } from "@/lib/utils";
 import { auth } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function FeedbackDetails({
   params,
@@ -28,29 +29,16 @@ export default async function FeedbackDetails({
   const { userId } = await auth();
   if (!userId) return;
 
-  const results = await db
-  .select({
-    feedback: Feedbacks,
-    message: Messages,
-  })
-  .from(Feedbacks)
-  .leftJoin(Messages, eq(Feedbacks.id, Messages.feedbackId))
-  .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
+  const feedbacks = await db
+    .select()
+    .from(Feedbacks)
 
-const feedbackMap = new Map();
+    .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
 
-results.forEach(({ feedback, message }) => {
-  if (!feedbackMap.has(feedback.id)) {
-    feedbackMap.set(feedback.id, { ...feedback, messages: [] });
+  console.log("FEEDBACK DETAILS >>>> ", feedbacks[0].messages);
+  if (!feedbacks.length || feedbackId !== feedbacks[0].id) {
+     notFound();
   }
-  if (message) {
-    feedbackMap.get(feedback.id).messages.push(message);
-  }
-});
-
-const feedbacks = Array.from(feedbackMap.values());
-
-  console.log("FEEDBACK DETAILS >>>> ", feedbacks);
 
   return (
     <div className="w-full my-10">
@@ -105,24 +93,22 @@ const feedbacks = Array.from(feedbackMap.values());
         {/* Messages Container */}
         <ScrollArea className="h-[500px] max-w-2xl">
           <div className="w-full flex flex-col gap-6">
-            {feedbacks
-              .flatMap((feedback) => feedback.messages)
-              .map((msg, index) => (
-                <div
-                  key={index}
-                  className="p-2 md:p-4 rounded-tl-none rounded-tr-lg rounded-br-lg rounded-bl-lg w-fit max-w-xl"
-                  style={{
-                    backgroundColor: "hsl(31, 97%, 72%)",
-                    color: "#fff",
-                    boxShadow: "0 4px 8px hsla(31, 97%, 40%, 0.5)",
-                  }}
-                >
-                  <p className="text-lg text-black">{msg.message}</p>
-                  <p className="text-xs text-zinc-600">
-                    {new Date(String(msg.createTs)).toLocaleDateString()}
-                  </p>
-                </div>
-              ))}
+            {feedbacks[0]?.messages.map((msg, index) => (
+              <div
+                key={index}
+                className="p-2 md:p-4 rounded-tl-none rounded-tr-lg rounded-br-lg rounded-bl-lg w-fit max-w-xl"
+                style={{
+                  backgroundColor: "hsl(31, 97%, 72%)",
+                  color: "#fff",
+                  boxShadow: "0 4px 8px hsla(31, 97%, 40%, 0.5)",
+                }}
+              >
+                <p className="text-lg text-black">{msg.message}</p>
+                <p className="text-xs text-zinc-600">
+                    {new Date(String(msg?.time)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </p>
+              </div>
+            ))}
           </div>
         </ScrollArea>
       </Container>

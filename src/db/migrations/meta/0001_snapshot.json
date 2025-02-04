@@ -1,6 +1,6 @@
 {
-  "id": "939143e6-269e-4649-974f-3ad1e7f21508",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "30599b06-0940-4a96-ab42-4fb1865de636",
+  "prevId": "939143e6-269e-4649-974f-3ad1e7f21508",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -46,11 +46,12 @@
           "primaryKey": false,
           "notNull": true
         },
-        "feedbacks": {
-          "name": "feedbacks",
+        "messages": {
+          "name": "messages",
           "type": "jsonb",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "'[]'::jsonb"
         }
       },
       "indexes": {},
