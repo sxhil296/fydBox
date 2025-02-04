@@ -29,19 +29,28 @@ export default async function FeedbackDetails({
   if (!userId) return;
 
   const results = await db
-    .select()
-    .from(Feedbacks)
-    .leftJoin(Messages, eq(Feedbacks.id, Messages.feedbackId))
-    .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
+  .select({
+    feedback: Feedbacks,
+    message: Messages,
+  })
+  .from(Feedbacks)
+  .leftJoin(Messages, eq(Feedbacks.id, Messages.feedbackId))
+  .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
 
-  const feedbacks = results.map((result) => {
-    return {
-      ...result.feedbacks,
-      messages: result.messages ? (Array.isArray(result.messages) ? result.messages : [result.messages]) : [],
-    };
-  });
+const feedbackMap = new Map();
 
-  console.log("FEEDBACK DETAILS >>>> ", feedbacks)
+results.forEach(({ feedback, message }) => {
+  if (!feedbackMap.has(feedback.id)) {
+    feedbackMap.set(feedback.id, { ...feedback, messages: [] });
+  }
+  if (message) {
+    feedbackMap.get(feedback.id).messages.push(message);
+  }
+});
+
+const feedbacks = Array.from(feedbackMap.values());
+
+  console.log("FEEDBACK DETAILS >>>> ", feedbacks);
 
   return (
     <div className="w-full my-10">
@@ -61,7 +70,7 @@ export default async function FeedbackDetails({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="w-full flex flex-col md:flex-row  justify-between items-start md:items-center gap-2 md:gap-0 my-4">
+        <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-0 my-4">
           <div className="flex items-center gap-4">
             <p className="text-2xl font-bold">{feedbacks[0]?.name}</p>
             <Badge
@@ -77,11 +86,11 @@ export default async function FeedbackDetails({
           </div>
           <div className="flex items-center gap-2">
             <ChangeStatus feedback={feedbacks[0]} />
-            <MoreOptions feedbackId={feedbackId}/>
+            <MoreOptions feedbackId={feedbackId} />
           </div>
         </div>
 
-        {/* link */}
+        {/* Link Section */}
         <div className="flex justify-start items-center gap-2 mb-5">
           <Link
             href={feedbacks[0]?.feedbackLink || "#"}
@@ -93,7 +102,7 @@ export default async function FeedbackDetails({
           <Button variant={"ghost"}>Copy</Button>
         </div>
 
-        {/* messages container */}
+        {/* Messages Container */}
         <ScrollArea className="h-[500px] max-w-2xl">
           <div className="w-full flex flex-col gap-6">
             {feedbacks
@@ -108,7 +117,7 @@ export default async function FeedbackDetails({
                     boxShadow: "0 4px 8px hsla(31, 97%, 40%, 0.5)",
                   }}
                 >
-                  <p className="text-lg text-black">{msg}</p>
+                  <p className="text-lg text-black">{msg.message}</p>
                   <p className="text-xs text-zinc-600">
                     {new Date(String(msg.createTs)).toLocaleDateString()}
                   </p>
