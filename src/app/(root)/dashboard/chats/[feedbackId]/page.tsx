@@ -31,17 +31,17 @@ export default async function FeedbackDetails({
   const results = await db
     .select()
     .from(Feedbacks)
-    .innerJoin(Messages, eq(Feedbacks.id, Messages.feedbackId))
+    .leftJoin(Messages, eq(Feedbacks.id, Messages.feedbackId))
     .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
 
   const feedbacks = results.map((result) => {
     return {
       ...result.feedbacks,
-      messages: Array.isArray(result.messages)
-        ? result.messages
-        : [result.messages],
+      messages: result.messages ? (Array.isArray(result.messages) ? result.messages : [result.messages]) : [],
     };
   });
+
+  console.log("FEEDBACK DETAILS >>>> ", feedbacks)
 
   return (
     <div className="w-full my-10">
@@ -72,7 +72,7 @@ export default async function FeedbackDetails({
                   : "bg-red-500"
               )}
             >
-              {feedbacks[0].status}
+              {feedbacks[0]?.status}
             </Badge>
           </div>
           <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ export default async function FeedbackDetails({
                     boxShadow: "0 4px 8px hsla(31, 97%, 40%, 0.5)",
                   }}
                 >
-                  <p className="text-lg text-black">{msg.message}</p>
+                  <p className="text-lg text-black">{msg}</p>
                   <p className="text-xs text-zinc-600">
                     {new Date(String(msg.createTs)).toLocaleDateString()}
                   </p>

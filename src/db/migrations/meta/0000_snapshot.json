@@ -1,5 +1,5 @@
 {
-  "id": "0b1f51a5-dc50-4fb3-b189-c55e6e50093b",
+  "id": "b562dea3-73c8-4f5c-8893-bb09af5d4a5b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -35,7 +35,7 @@
         },
         "status": {
           "name": "status",
-          "type": "linkfeedback_status",
+          "type": "fyd_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -61,7 +61,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
@@ -74,9 +74,9 @@
         },
         "message": {
           "name": "message",
-          "type": "text",
+          "type": "jsonb",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "feedbackId": {
           "name": "feedbackId",
@@ -109,8 +109,8 @@
     }
   },
   "enums": {
-    "public.linkfeedback_status": {
-      "name": "linkfeedback_status",
+    "public.fyd_status": {
+      "name": "fyd_status",
       "schema": "public",
       "values": [
         "active",

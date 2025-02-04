@@ -12,7 +12,7 @@ export default function SendPage() {
   };
   return (
     <div className="w-full">
-      <Container className="flex justify-center items-center min-h-screen">
+      <Container className="flex justify-center items-center min-h-[80dvh]">
         <div className="flex flex-col gap-4 items-center justify-center">
             <CheckCheckIcon className="w-8 h-auto"/>
           <p className="text-xl font-medium text-center">

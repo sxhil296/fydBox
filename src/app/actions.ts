@@ -8,8 +8,8 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-// const BASE_URL = "http://localhost:3000/feedback";
-const BASE_URL = "https://fydbox.vercel.app/feedback";
+const BASE_URL = "http://localhost:3000/feedback";
+// const BASE_URL = "https://fydbox.vercel.app/feedback";
 
 export async function generateLinkAction(formData: FormData) {
   const { userId, redirectToSignIn } = await auth();
@@ -82,13 +82,17 @@ export async function changeStatusAction(formData: FormData): Promise<void> {
 export async function submitFeedbackAction(formData: FormData): Promise<void> {
   const feedback = formData.get("feedback") as string;
   const feedbackId = formData.get("feedbackId") as string;
-  const msgId = randomUUID();
 
+ try {
   const results = await db.insert(Messages).values({
-    id: msgId,
     feedbackId: feedbackId,
-    message: feedback,
+    message: [feedback],
+  
   });
   console.log(results);
+ } catch (error) {
+  console.log("feedback submission error", error)
+ }
+  
   redirect(`/feedback/${feedbackId}/sent`);
 }

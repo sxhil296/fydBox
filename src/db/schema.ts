@@ -2,10 +2,12 @@ import {
   pgTable,
   timestamp,
   text,
+  serial,
+  jsonb,
   pgEnum,
 } from "drizzle-orm/pg-core";
 
-export const statusEnum = pgEnum("linkfeedback_status", ["active", "inactive"]);
+export const statusEnum = pgEnum("fyd_status", ["active", "inactive"]);
 
 export const Feedbacks = pgTable("feedbacks", {
   id: text("id").primaryKey().notNull(),
@@ -17,9 +19,9 @@ export const Feedbacks = pgTable("feedbacks", {
 });
 
 export const Messages = pgTable("messages", {
-  id: text("id").primaryKey().notNull(),
+  id: serial("id").primaryKey().notNull(),
   createTs: timestamp("createTs").defaultNow().notNull(),
-  message: text("message").notNull(),
+  message: jsonb("message").$type<string[]>(),
   feedbackId: text("feedbackId")
     .notNull()
     .references(() => Feedbacks.id),

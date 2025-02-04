@@ -1,3 +1,4 @@
+'use client'
 import {
   Table,
   TableBody,
@@ -8,18 +9,24 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { Copy, PlusCircle } from "lucide-react";
+import { CheckCheckIcon, Copy, PlusCircle } from "lucide-react";
 import type { Feedbacks } from "@/db/schema";
 import { cn } from "@/lib/utils";
 import Container from "@/components/general/container";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 
+import { useState } from "react";
+
 interface FeedbackTableProps {
   feedbacks: (typeof Feedbacks.$inferSelect)[];
+  messages: number
 }
 
-export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
+
+export default function FeedbackTable({ feedbacks, messages }: FeedbackTableProps) {
+  const [copied, setCopied] = useState(false);
+
   return (
     <div className="w-full">
       <Container className="flex-grow flex flex-col gap-6 md:gap-10">
@@ -79,7 +86,7 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                     <TableCell className="font-medium p-0">
                       <Link
                         href={`/dashboard/chats/${feedback?.id}`}
-                        className="block p-2 md:p-4"
+                        className="block p-2 md:p-4 capitalize"
                       >
                         {feedback?.name}
                       </Link>
@@ -89,18 +96,40 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                         href={`/dashboard/chats/${feedback?.id}`}
                         className="block p-2 md:p-4"
                       >
-                        124
+                        {messages}
                       </Link>
                     </TableCell>
                     <TableCell className="p-0 hidden md:table-cell text-center">
-                      <div className="flex items-center justify-center gap-2 overflow-hidden ">
+                      <div className="flex items-center justify-center gap-2 overflow-hidden">
                         <Link
                           href={feedback?.feedbackLink || "#"}
-                          className="block p-2 md:p-4 text-blue-500 max-w-[50ch] lg:max-w-full truncate"
+                          className={`block p-2 md:p-4 ${
+                            feedback?.feedbackLink
+                              ? "text-blue-500"
+                              : "text-gray-500"
+                          } max-w-[50ch] lg:max-w-full truncate`}
                         >
-                          {feedback?.feedbackLink}
+                          {feedback?.feedbackLink ||
+                            "You have closed this feedback. Change status to Active to see the feedback link."}
                         </Link>
-                        <Copy className="w-4 h-auto cursor-pointer flex-shrink-0" />
+                        {feedback?.feedbackLink && (
+                            <button
+                            onClick={() => {
+                              navigator.clipboard.writeText(feedback?.feedbackLink || "").then(() => {
+                              setCopied(true);
+                              setTimeout(() => setCopied(false), 2000);
+                              });
+                            }}
+                            className="cursor-pointer"
+                            >
+                            {copied ? (
+                              <CheckCheckIcon className="w-4 h-auto flex-shrink-0" />
+                            ) : (
+                              <Copy className="w-4 h-auto flex-shrink-0" />
+                            )}
+                            </button>
+                          
+                        )}
                       </div>
                     </TableCell>
                     <TableCell className="text-center p-0">
@@ -126,7 +155,7 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
             </Table>
           </ScrollArea>
         ) : (
-          <div className="text-center p-6 text-gray-500">No feedbacks yet.</div>
+          <div className="text-center p-6 text-gray-500">No feedbacks yet. Click the Create button above to create new feedback.</div>
         )}
       </Container>
     </div>

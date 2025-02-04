@@ -15,7 +15,7 @@ export default async function Dashboard() {
 
   return (
     <div className="my-10 w-full flex flex-col items-center gap-4 md:gap-10">
-      <FeedbackTable  feedbacks={feedbacks}/>
+      <FeedbackTable feedbacks={feedbacks} messages={12} />
     </div>
   );
 }
