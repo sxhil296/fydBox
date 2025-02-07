@@ -5,6 +5,7 @@ import {
   text,
   jsonb,
   pgEnum,
+  boolean,
 } from "drizzle-orm/pg-core";
 
 export const statusEnum = pgEnum("fydboxlink_status", ["active", "inactive"]);
@@ -15,6 +16,7 @@ export const Feedbacks = pgTable("feedbacks", {
   name: text("name").notNull(),
   feedbackLink: text("feedbackLink"),
   status: statusEnum("status").notNull(),
+  privacy: text("privacy").notNull(),
   userId: text("userId").notNull(),
   messages: jsonb("messages")
     .$type<Array<{ message: string; time: string }>>()

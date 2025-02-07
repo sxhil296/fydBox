@@ -1,0 +1,1 @@
+ALTER TABLE "feedbacks" ADD COLUMN "privacy" text NOT NULL;

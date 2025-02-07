@@ -6,10 +6,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function SendPage() {
+  // const params = useParams();
+  // const feedbackId = params.feedbackId as string;
   const router = useRouter();
   const goBack = () => {
     router.back();
   };
+
   return (
     <div className="w-full">
       <Container className="flex justify-center items-center my-20">

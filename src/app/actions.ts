@@ -8,8 +8,8 @@ import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-// const BASE_URL = "http://localhost:3000/feedback";
-const BASE_URL = "https://fydbox.vercel.app/feedback";
+const BASE_URL = "http://localhost:3000/feedback";
+// const BASE_URL = "https://fydbox.vercel.app/feedback";
 
 export async function generateLinkAction(formData: FormData) {
   const { userId, redirectToSignIn } = await auth();
@@ -19,6 +19,7 @@ export async function generateLinkAction(formData: FormData) {
   const name = formData.get("name") as string;
   const feedbackId = randomUUID();
   const feedbackLink = `${BASE_URL}/${feedbackId}`;
+  const privacy = formData.get("privacy") as string;
 
   const results = await db
     .insert(Feedbacks)
@@ -28,11 +29,13 @@ export async function generateLinkAction(formData: FormData) {
       id: feedbackId,
       status: "active",
       userId: userId,
+      privacy: privacy
     })
     .returning({
       name: Feedbacks.name,
       id: Feedbacks.id,
       link: Feedbacks.feedbackLink,
+      privacy: Feedbacks.privacy,
     });
   // console.log(feedbackLink);
   console.log("FEEDBACK RESULTS", results);

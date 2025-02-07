@@ -96,7 +96,7 @@ export default async function FeedbackDetails({
             {feedbacks[0]?.messages.map((msg, index) => (
               <div
                 key={index}
-                className="p-2 md:p-4 rounded-tl-none rounded-tr-lg rounded-br-lg rounded-bl-lg w-fit max-w-xl"
+                className="p-2 rounded-tl-none rounded-tr-lg rounded-br-lg rounded-bl-lg w-fit max-w-xl"
                 style={{
                   backgroundColor: "hsl(31, 97%, 72%)",
                   color: "#fff",
