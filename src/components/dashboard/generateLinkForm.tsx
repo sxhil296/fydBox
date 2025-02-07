@@ -7,7 +7,6 @@ import { useState } from "react";
 import ShareLink from "./shareLink";
 import Container from "../general/container";
 import { Label } from "../ui/label";
-import { Checkbox } from "../ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 export default function GenerateLinkForm() {

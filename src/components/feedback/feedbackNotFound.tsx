@@ -12,7 +12,7 @@ export default function FeedbackNotFound() {
             <p>OR</p>
             <p>This is a private feedback.</p>
             <p>OR</p>
-            <p>This feedback doesn't exist anymore.</p>
+            <p>This feedback doesn&apos;t exist anymore.</p>
           </div>
           <Button>
             <Link href={"/"}>Create your Feedback link</Link>

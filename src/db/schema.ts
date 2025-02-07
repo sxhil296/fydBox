@@ -5,7 +5,6 @@ import {
   text,
   jsonb,
   pgEnum,
-  boolean,
 } from "drizzle-orm/pg-core";
 
 export const statusEnum = pgEnum("fydboxlink_status", ["active", "inactive"]);

@@ -20,12 +20,11 @@ const PRIVACY_OPTIONS = [
   },
 ];
 
-interface ChangeStatusProps {
-  //   action: (formData: FormData) => Promise<void>;
+interface ChangePrivacyProps {
   feedback: typeof Feedbacks.$inferSelect;
 }
 
-export default function ChangePrivacy({ feedback }: ChangeStatusProps) {
+export default function ChangePrivacy({ feedback }: ChangePrivacyProps) {
   return (
     <div>
       <DropdownMenu>
