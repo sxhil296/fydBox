@@ -1,3 +1,4 @@
+import ChangePrivacy from "@/components/dashboard/changePrivacy";
 import ChangeStatus from "@/components/dashboard/changeStatus";
 import MoreOptions from "@/components/dashboard/moreOptions";
 import Container from "@/components/general/container";
@@ -65,14 +66,25 @@ export default async function FeedbackDetails({
               className={cn(
                 "capitalize",
                 feedbacks[0]?.status === "active"
-                  ? "bg-green-500"
-                  : "bg-red-500"
+                  ? "bg-yellow-500"
+                  : "bg-gray-500"
               )}
             >
               {feedbacks[0]?.status}
             </Badge>
+            <Badge
+              className={cn(
+                "capitalize",
+                feedbacks[0]?.privacy === "public"
+                  ? "bg-green-500"
+                  : "bg-red-500"
+              )}
+            >
+              {feedbacks[0]?.privacy}
+            </Badge>
           </div>
           <div className="flex items-center gap-2">
+            <ChangePrivacy feedback={feedbacks[0]} />
             <ChangeStatus feedback={feedbacks[0]} />
             <MoreOptions feedbackId={feedbackId} />
           </div>

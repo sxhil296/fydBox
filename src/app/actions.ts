@@ -29,7 +29,7 @@ export async function generateLinkAction(formData: FormData) {
       id: feedbackId,
       status: "active",
       userId: userId,
-      privacy: privacy
+      privacy: privacy,
     })
     .returning({
       name: Feedbacks.name,
@@ -80,6 +80,26 @@ export async function changeStatusAction(formData: FormData): Promise<void> {
   revalidatePath(`/dashboard/chats/${feedbackId}`, "page");
 }
 
+// change privacy
+export async function changePrivacyAction(formData: FormData): Promise<void> {
+  const { userId, redirectToSignIn } = await auth();
+  if (!userId) return redirectToSignIn();
+  const feedbackId = formData.get("id") as string;
+  const privacy = formData.get("privacy") as string;
+
+  const results = await db
+    .update(Feedbacks)
+    .set({ privacy })
+    .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)))
+    .returning({
+      id: Feedbacks.id,
+      privacy: Feedbacks.privacy,
+    });
+
+  console.log("PRIVACY CHANGE RESULTS", results);
+  revalidatePath(`/dashboard/chats/${feedbackId}`, "page");
+}
+
 export async function submitFeedbackAction(formData: FormData): Promise<void> {
   const feedback = formData.get("feedback") as string;
   const feedbackId = formData.get("feedbackId") as string;
@@ -89,7 +109,7 @@ export async function submitFeedbackAction(formData: FormData): Promise<void> {
     const results = await db
       .update(Feedbacks)
       .set({
-        messages: sql`messages || jsonb_build_array(jsonb_build_object('message', ${feedback}::text, 'time', ${timestamp}::text))`
+        messages: sql`messages || jsonb_build_array(jsonb_build_object('message', ${feedback}::text, 'time', ${timestamp}::text))`,
       })
       .where(eq(Feedbacks.id, feedbackId))
       .returning({

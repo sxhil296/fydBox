@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Table,
   TableBody,
@@ -20,9 +20,7 @@ import { useState } from "react";
 
 interface FeedbackTableProps {
   feedbacks: (typeof Feedbacks.$inferSelect)[];
-
 }
-
 
 export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
   const [copied, setCopied] = useState(false);
@@ -57,6 +55,9 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                   </TableHead>
                   <TableHead className="p-2 md:p-4 text-center">
                     Status
+                  </TableHead>
+                  <TableHead className="p-2 md:p-4 text-center">
+                    Privacy
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -100,35 +101,36 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                       </Link>
                     </TableCell>
                     <TableCell className="p-0 hidden md:table-cell text-center">
-                      <div className="flex items-center justify-center gap-2 overflow-hidden">
+                      <div className="flex items-center justify-center gap-1 overflow-hidden">
                         <Link
                           href={feedback?.feedbackLink || "#"}
                           className={`block p-2 md:p-4 ${
                             feedback?.feedbackLink
                               ? "text-blue-500"
                               : "text-gray-500"
-                          } max-w-[50ch] lg:max-w-full truncate`}
+                          } max-w-[60ch] truncate`}
                         >
                           {feedback?.feedbackLink ||
                             "You have closed this feedback. Change status to Active to see the feedback link."}
                         </Link>
                         {feedback?.feedbackLink && (
-                            <button
+                          <button
                             onClick={() => {
-                              navigator.clipboard.writeText(feedback?.feedbackLink || "").then(() => {
-                              setCopied(true);
-                              setTimeout(() => setCopied(false), 2000);
-                              });
+                              navigator.clipboard
+                                .writeText(feedback?.feedbackLink || "")
+                                .then(() => {
+                                  setCopied(true);
+                                  setTimeout(() => setCopied(false), 2000);
+                                });
                             }}
                             className="cursor-pointer"
-                            >
+                          >
                             {copied ? (
                               <CheckCheckIcon className="w-4 h-auto flex-shrink-0" />
                             ) : (
                               <Copy className="w-4 h-auto flex-shrink-0" />
                             )}
-                            </button>
-                          
+                          </button>
                         )}
                       </div>
                     </TableCell>
@@ -141,11 +143,28 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                           className={cn(
                             "capitalize",
                             feedback?.status === "active"
+                              ? "bg-yellow-500"
+                              : "bg-gray-500"
+                          )}
+                        >
+                          {feedback?.status}
+                        </Badge>
+                      </Link>
+                    </TableCell>
+                    <TableCell className="text-center p-0">
+                      <Link
+                        href={`/dashboard/chats/${feedback?.id}`}
+                        className="block p-2 md:p-4"
+                      >
+                        <Badge
+                          className={cn(
+                            "capitalize",
+                            feedback?.privacy === "public"
                               ? "bg-green-500"
                               : "bg-red-500"
                           )}
                         >
-                          {feedback?.status}
+                          {feedback?.privacy}
                         </Badge>
                       </Link>
                     </TableCell>
@@ -155,7 +174,10 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
             </Table>
           </ScrollArea>
         ) : (
-          <div className="text-center p-6 text-gray-500">No feedbacks yet. Click the Create button above to create new feedback.</div>
+          <div className="text-center p-6 text-gray-500">
+            No feedbacks yet. Click the Create button above to create new
+            feedback.
+          </div>
         )}
       </Container>
     </div>
