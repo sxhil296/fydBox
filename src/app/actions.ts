@@ -38,7 +38,7 @@ export async function generateLinkAction(formData: FormData) {
       privacy: Feedbacks.privacy,
     });
   // console.log(feedbackLink);
-  console.log("FEEDBACK RESULTS", results);
+  // console.log("FEEDBACK RESULTS", results);
   revalidatePath("/dashboard/create", "page");
   return results[0];
 }

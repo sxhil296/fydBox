@@ -117,7 +117,12 @@ export default async function FeedbackDetails({
               >
                 <p className="text-lg text-black">{msg.message}</p>
                 <p className="text-xs text-zinc-600">
-                    {new Date(String(msg?.time)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {new Date(msg.time).toLocaleString('en-US', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true,
+                      timeZone: 'Asia/Kolkata'
+                    })}
                 </p>
               </div>
             ))}
