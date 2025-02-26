@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-
 import { ThemeProvider } from "@/components/theme-provider";
+
+const APP_NAME = "FydBox";
+const APP_DEFAULT_TITLE = "FydBox";
+const APP_TITLE_TEMPLATE = "%s - FydBox";
+const APP_DESCRIPTION = "Honest Feedback, No Names Attached";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +20,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FydBox",
-  description: "Honest Feedback, No Names Attached",
+  applicationName: APP_NAME,
+  title: { default: APP_DEFAULT_TITLE, template: APP_TITLE_TEMPLATE },
+  description: APP_DESCRIPTION,
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
