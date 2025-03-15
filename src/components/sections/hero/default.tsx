@@ -48,7 +48,8 @@ export default function Hero() {
               <ArrowRightIcon className="h-3 w-3" />
             </Link>
           </Badge>
-          <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight">
+          <a href="https://www.producthunt.com/posts/fydbox?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-fydbox" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=942046&theme=light&t=1742065690541" alt="FydBox - Collect&#0032;genuine&#0044;&#0032;anonymous&#0032;feedback&#0032;with&#0032;ease&#0046; | Product Hunt" style={{width: "250px", height: '54px'}} width="250" height="54" /></a>
+          <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-7xl md:leading-tight">
             Honest Feedback, No Names Attached
           </h1>
           <p className="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground opacity-0 delay-100 sm:text-xl">
@@ -66,8 +67,11 @@ export default function Hero() {
                   <Github className="mr-2 h-4 w-4" /> Github
                 </a>
               </Button> */}
+            
             </div>
+            
           </div>
+          
           <div className="relative pt-12">
             <MockupFrame
               className="animate-appear opacity-0 delay-700"
