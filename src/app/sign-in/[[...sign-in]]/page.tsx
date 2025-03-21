@@ -11,7 +11,7 @@ export default function SignInPage() {
       <SignIn.Root>
         <SignIn.Step
           name="start"
-          className="w-full space-y-6  px-4 py-10 sm:w-96 sm:px-8"
+          className="w-full space-y-6  px-4 py-10 sm:w-96 sm:px-8 border rounded-lg"
         >
           <header className="flex flex-col justify-center items-center">
             <MessageCircle className="w-9 h-9" />
@@ -26,7 +26,7 @@ export default function SignInPage() {
               type="email"
               required
               placeholder="Email"
-              className="w-full border-b border-neutral-200  p-2 rounded-md text-sm/6  outline-none placeholder:text-neutral-400 hover:border-neutral-300 focus:border-neutral-600 data-[invalid]:border-red-600 data-[invalid]:text-red-600"
+              className="w-full border border-neutral-600  p-2 rounded-md text-sm/6  outline-none placeholder:text-neutral-400 hover:border-neutral-400 focus:border-neutral-300 data-[invalid]:border-red-600 data-[invalid]:text-red-600"
             />
             <Clerk.FieldError className="mt-2 block text-xs text-red-600" />
           </Clerk.Field>
@@ -69,7 +69,7 @@ export default function SignInPage() {
             Don&apos;t have an account?{" "}
             <Clerk.Link
               navigate="sign-up"
-              className="r text-neutral-700 outline-none hover:underline"
+              className=" text-neutral-300 outline-none hover:underline"
             >
               Sign up
             </Clerk.Link>

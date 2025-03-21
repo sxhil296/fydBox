@@ -23,7 +23,7 @@ interface FeedbackTableProps {
 }
 
 export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
 
   return (
     <div className="w-full">
@@ -115,21 +115,21 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                         </Link>
                         {feedback?.feedbackLink && (
                           <button
-                            onClick={() => {
-                              navigator.clipboard
-                                .writeText(feedback?.feedbackLink || "")
-                                .then(() => {
-                                  setCopied(true);
-                                  setTimeout(() => setCopied(false), 2000);
-                                });
-                            }}
-                            className="cursor-pointer"
+                          onClick={() => {
+                            navigator.clipboard
+                            .writeText(feedback.feedbackLink || "")
+                            .then(() => {
+                              setCopied(feedback.id);
+                              setTimeout(() => setCopied(null), 2000);
+                            });
+                          }}
+                          className="cursor-pointer"
                           >
-                            {copied ? (
-                              <CheckCheckIcon className="w-4 h-auto flex-shrink-0" />
-                            ) : (
-                              <Copy className="w-4 h-auto flex-shrink-0" />
-                            )}
+                          {copied === feedback.id ? (
+                            <CheckCheckIcon className="w-4 h-auto flex-shrink-0" />
+                          ) : (
+                            <Copy className="w-4 h-auto flex-shrink-0" />
+                          )}
                           </button>
                         )}
                       </div>
