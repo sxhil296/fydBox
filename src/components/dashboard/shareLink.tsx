@@ -13,13 +13,16 @@ import {
 } from "react-share";
 import { Button } from "../ui/button";
 import * as htmlToImage from "html-to-image";
+import { ShineBorder } from "../magicui/shine-border";
+import { CheckCheck, Copy } from "lucide-react";
 
 interface ShareLinkProps {
   link: string;
   feedbackName: string;
+  feedbackDescription:string;
 }
 
-export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
+export default function ShareLink({ link, feedbackName, feedbackDescription }: ShareLinkProps) {
   const [copied, setCopied] = useState(false);
   const qrCodeRef = useRef<HTMLDivElement>(null);
 
@@ -47,13 +50,15 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
   };
 
   return (
-    <div className="relative border border-brand rounded-md p-4 w-full sm:max-w-3xl mx-auto flex flex-col gap-2 md:gap-4">
-      <div className="text-lg font-medium text-center">
-        Below is the link and QR for your{" "}
-        <span className="font-bold text-blue-500">{feedbackName}</span> feedback
+    <div className="relative rounded-md p-4 w-full sm:max-w-3xl mx-auto flex flex-col gap-2 md:gap-4 shadow-lg">
+      <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+      <div className="text-lg font-medium text-center space-y-2">
+       <p> Below is the link and QR for your feedback</p>
+        <p className="font-bold text-blue-500">{feedbackName}</p> 
+        <p className="text-sm font-normal max-w-sm mx-auto">{feedbackDescription}</p>
       </div>
 
-      <div className="flex items-center justify-center gap-2 w-full sm:w-auto overflow-hidden">
+      <div className="flex items-center justify-center gap-2 w-full sm:w-auto overflow-hidden bg-brand/40 max-w-fit mx-auto p-4 rounded">
         <Link
           href={link}
           target="_blank"
@@ -62,8 +67,8 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
           {link}
         </Link>
 
-        <button onClick={copyToClipboard} type="button" className="text-sm">
-          {copied ? "Copied" : "Copy"}
+        <button onClick={copyToClipboard} type="button" className="text-sm text-zinc-500">
+          {copied ? <CheckCheck /> : <Copy />}
         </button>
       </div>
 
@@ -90,7 +95,7 @@ export default function ShareLink({ link, feedbackName }: ShareLinkProps) {
       <div className="flex flex-col items-center gap-2">
         <div
           ref={qrCodeRef}
-          className="qr-code bg-white p-4 rounded-md w-56 h-auto flex justify-center items-center flex-col gap-4"
+          className="qr-code bg-white p-4 rounded-md w-56 h-auto flex justify-center items-center flex-col gap-4 mb-2"
         >
           <h3 className="text-lg  mb-2 text-black text-center">
             Scan the QR Code below to give your anonymous feedback on &nbsp;

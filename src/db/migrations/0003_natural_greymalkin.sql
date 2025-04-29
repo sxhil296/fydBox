@@ -1,0 +1,1 @@
+ALTER TABLE "feedbacks" ADD COLUMN "description" text NOT NULL;

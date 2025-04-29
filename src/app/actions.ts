@@ -8,6 +8,7 @@ import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+
 // const BASE_URL = "http://localhost:3000/feedback";
 const BASE_URL = "https://fydbox.vercel.app/feedback";
 
@@ -17,14 +18,20 @@ export async function generateLinkAction(formData: FormData) {
   if (!userId) return redirectToSignIn();
 
   const name = formData.get("name") as string;
+  const description = formData.get("description") as string;
   const feedbackId = randomUUID();
   const feedbackLink = `${BASE_URL}/${feedbackId}`;
   const privacy = formData.get("privacy") as string;
+
+ if(!name || name.trim().length < 4 || name.trim().length > 40 || !description || description.trim().length < 10 || description.trim().length > 500){
+  return
+ }
 
   const results = await db
     .insert(Feedbacks)
     .values({
       name,
+      description,
       feedbackLink,
       id: feedbackId,
       status: "active",
@@ -33,6 +40,7 @@ export async function generateLinkAction(formData: FormData) {
     })
     .returning({
       name: Feedbacks.name,
+      description: Feedbacks.description,
       id: Feedbacks.id,
       link: Feedbacks.feedbackLink,
       privacy: Feedbacks.privacy,
@@ -54,6 +62,7 @@ export async function deleteFeedbackAction(formData: FormData) {
     .where(and(eq(Feedbacks.id, feedbackId), eq(Feedbacks.userId, userId)));
 
   console.log("DELETE RESULTS", results);
+
   redirect("/dashboard");
 }
 

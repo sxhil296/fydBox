@@ -13,6 +13,7 @@ export const Feedbacks = pgTable("feedbacks", {
   id: text("id").primaryKey().notNull(),
   createTs: timestamp("createTs").defaultNow().notNull(),
   name: text("name").notNull(),
+  description: text("description").notNull(),
   feedbackLink: text("feedbackLink"),
   status: statusEnum("status").notNull(),
   privacy: text("privacy").notNull(),

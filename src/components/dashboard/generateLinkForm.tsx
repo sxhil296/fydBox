@@ -8,17 +8,60 @@ import ShareLink from "./shareLink";
 import Container from "../general/container";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Textarea } from "../ui/textarea";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export default function GenerateLinkForm() {
   const [feedBack, setFeedback] = useState<
-    { name: string; id: string; link: string | null } | undefined
+    { name: string; description:string; id: string; link: string | null } | undefined
   >(undefined);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    privacy: "private"
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleRadioChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      privacy: value
+    }));
+  };
 
   const formAction = async (formData: FormData) => {
+     const name = formData.get("name")?.toString() || "";
+     const description = formData.get("description")?.toString() || "";
+
+     if (!name || name.trim().length < 4) {
+        toast.error("Feedback Name must be at least 4 characters long.");
+        return;
+      } 
+      if (name.trim().length > 40) {
+        toast.error("Feedback Name must be less than 40 characters.");
+        return;
+      }
+      if (!description || description.trim().length < 10) {
+        toast.error("Feedback Description must be at least 10 characters long.");
+        return;
+      } 
+      if (description.trim().length > 500) {
+        toast.error("Feedback Description must be less than 500 characters.");
+        return;
+      }
     const result = await generateLinkAction(formData);
     setFeedback(result);
+    toast.success("Feedback link generated successfully!")
     localStorage.setItem("result", JSON.stringify(result));
-    console.log("Generated Link Result:", result);
+    // console.log("Generated Link Result:", result);
   };
 
   return (
@@ -37,13 +80,26 @@ export default function GenerateLinkForm() {
                 placeholder="Enter feedback name..."
                 name="name"
                 id="name"
+                value={formData.name}
+                onChange={handleChange}
+                className={cn("flex-1 w-full px-4 py-2", )}
+              />
+              <Textarea
+                placeholder="Enter feedback description..."
+                name="description"
+                id="description"
+                value={formData.description}
+                onChange={handleChange}
+                rows={6}
                 className="flex-1 w-full px-4 py-2"
-                required
               />
             </div>
             <div className="flex flex-col items-start gap-2 w-full">
-              <Label htmlFor="privacy" className="text-lg font-medium">Choose who can see the feedbacks</Label>
-              <RadioGroup id="privacy" name="privacy" defaultValue="private">
+              <Label htmlFor="privacy" className="text-lg font-medium">
+                Choose who can see the feedbacks
+              </Label>
+              <RadioGroup id="privacy" name="privacy" defaultValue="private" value={formData.privacy}
+                onValueChange={handleRadioChange}>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="private" id="r1" />
                   <Label htmlFor="r1">Only Me</Label>
@@ -64,6 +120,7 @@ export default function GenerateLinkForm() {
           <div className="mt-8">
             <ShareLink
               feedbackName={feedBack.name}
+              feedbackDescription={feedBack.description}
               link={feedBack.link || ""}
             />
           </div>
