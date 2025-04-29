@@ -16,7 +16,8 @@ import Container from "@/components/general/container";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 interface FeedbackTableProps {
   feedbacks: (typeof Feedbacks.$inferSelect)[];
@@ -24,6 +25,15 @@ interface FeedbackTableProps {
 
 export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
   const [copied, setCopied] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="w-full">
@@ -40,7 +50,20 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
             </Link>
           </Button>
         </div>
-        {feedbacks.length > 0 ? (
+        {loading && (
+          <div className="space-y-4">
+            {[...Array(5)].map((_, index) => (
+              <div
+                key={index}
+                className=" flex items-center justify-between px-4 py-2 rounded-md"
+              >
+                <Skeleton className="h-8 bg-zinc-600 rounded w-full"></Skeleton>
+
+              </div>
+            ))}
+          </div>
+        )}
+        {feedbacks.length > 0 && !loading && (
           <ScrollArea className="h-[500px] w-full">
             <Table>
               <TableHeader className="sticky top-0 bg-background z-10">
@@ -115,21 +138,21 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
                         </Link>
                         {feedback?.feedbackLink && (
                           <button
-                          onClick={() => {
-                            navigator.clipboard
-                            .writeText(feedback.feedbackLink || "")
-                            .then(() => {
-                              setCopied(feedback.id);
-                              setTimeout(() => setCopied(null), 2000);
-                            });
-                          }}
-                          className="cursor-pointer"
+                            onClick={() => {
+                              navigator.clipboard
+                                .writeText(feedback.feedbackLink || "")
+                                .then(() => {
+                                  setCopied(feedback.id);
+                                  setTimeout(() => setCopied(null), 2000);
+                                });
+                            }}
+                            className="cursor-pointer"
                           >
-                          {copied === feedback.id ? (
-                            <CheckCheckIcon className="w-4 h-auto flex-shrink-0" />
-                          ) : (
-                            <Copy className="w-4 h-auto flex-shrink-0" />
-                          )}
+                            {copied === feedback.id ? (
+                              <CheckCheckIcon className="w-4 h-auto flex-shrink-0" />
+                            ) : (
+                              <Copy className="w-4 h-auto flex-shrink-0" />
+                            )}
                           </button>
                         )}
                       </div>
@@ -173,7 +196,8 @@ export default function FeedbackTable({ feedbacks }: FeedbackTableProps) {
               </TableBody>
             </Table>
           </ScrollArea>
-        ) : (
+        )}
+        {!loading && feedbacks.length === 0 && (
           <div className="text-center p-6 text-gray-500">
             No feedbacks yet. Click the Create button above to create new
             feedback.
