@@ -2,6 +2,7 @@ import ChangePrivacy from "@/components/dashboard/changePrivacy";
 import ChangeStatus from "@/components/dashboard/changeStatus";
 import MoreOptions from "@/components/dashboard/moreOptions";
 import Container from "@/components/general/container";
+import CopyButton from "@/components/general/copyButton";
 import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
@@ -99,7 +100,8 @@ export default async function FeedbackDetails({
           >
             {feedbacks[0]?.feedbackLink || "The link has been deactivated!"}
           </Link>
-          <Button variant={"ghost"}>Copy</Button>
+          {/* <Button variant={"ghost"}>Copy</Button> */}
+          <CopyButton textToCopy={feedbacks[0]?.feedbackLink || ""} />
         </div>
 
         {/* Messages Container */}

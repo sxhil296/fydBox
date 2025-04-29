@@ -15,6 +15,7 @@ import { Button } from "../ui/button";
 import * as htmlToImage from "html-to-image";
 import { ShineBorder } from "../magicui/shine-border";
 import { CheckCheck, Copy } from "lucide-react";
+import CopyButton from "../general/copyButton";
 
 interface ShareLinkProps {
   link: string;
@@ -26,12 +27,12 @@ export default function ShareLink({ link, feedbackName, feedbackDescription }: S
   const [copied, setCopied] = useState(false);
   const qrCodeRef = useRef<HTMLDivElement>(null);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(link).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
+  // const copyToClipboard = () => {
+  //   navigator.clipboard.writeText(link).then(() => {
+  //     setCopied(true);
+  //     setTimeout(() => setCopied(false), 2000);
+  //   });
+  // };
 
   const downloadQRCode = () => {
     if (qrCodeRef.current) {
@@ -67,9 +68,10 @@ export default function ShareLink({ link, feedbackName, feedbackDescription }: S
           {link}
         </Link>
 
-        <button onClick={copyToClipboard} type="button" className="text-sm text-zinc-500">
+        {/* <button onClick={copyToClipboard} type="button" className="text-sm text-zinc-500">
           {copied ? <CheckCheck /> : <Copy />}
-        </button>
+        </button> */}
+        <CopyButton textToCopy={link}/>
       </div>
 
 
