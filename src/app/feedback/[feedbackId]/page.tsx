@@ -14,10 +14,10 @@ import Link from "next/link";
 export default async function Feedback({
   params,
 }: {
-  params: { feedbackId: string };
+  params: Promise<{ feedbackId: string }>;
 }) {
-  const feedbackId = params.feedbackId;
-  // console.log(feedbackId)
+  const feedbackId = (await params).feedbackId;
+
 
   const result = await db
     .select()
@@ -25,7 +25,7 @@ export default async function Feedback({
     .where(eq(Feedbacks.id, feedbackId))
     .limit(1);
 
-  console.log(">>>", result);
+  // console.log(">>>", result);
   if (feedbackId !== result[0]?.id || result[0].feedbackLink === null) {
     return <FeedbackNotFound />;
   }
