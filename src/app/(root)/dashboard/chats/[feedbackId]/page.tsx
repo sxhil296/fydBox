@@ -12,7 +12,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { db } from "@/db";
 import { Feedbacks } from "@/db/schema";
@@ -100,7 +99,6 @@ export default async function FeedbackDetails({
           >
             {feedbacks[0]?.feedbackLink || "The link has been deactivated!"}
           </Link>
-          {/* <Button variant={"ghost"}>Copy</Button> */}
           <CopyButton textToCopy={feedbacks[0]?.feedbackLink || ""} />
         </div>
 
